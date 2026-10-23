@@ -10,7 +10,7 @@ else
   then
     ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number=$1")
   else
-    ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE name='$1' OR symbol='$1'")
+    ATOMIC_NUMBER=$($PSQL "SELECT atomic_number FROM elements WHERE LOWER(name)=LOWER('$1') OR LOWER(symbol)=LOWER('$1')")
   fi
 
   if [[ -z "$ATOMIC_NUMBER" ]]
